@@ -1,0 +1,3 @@
+displayName = Unlimited Mod
+author = Morgan
+version = 0.1
