@@ -6,7 +6,7 @@ using UnlimitedMod.system.DiabloItem;
 
 namespace UnlimitedMod
 {
-	public class ExampleSword : ModItem
+	public class TestItem : ModItem
 	{
 		public override void SetDefaults() {
 			Item.width = 40; // The item texture's width.
@@ -25,7 +25,7 @@ namespace UnlimitedMod
 			Item.value = Item.buyPrice(gold: 1); // The value of the weapon in copper coins.
 			Item.rare = ItemRarityID.Expert; // Give this item our custom rarity.
 			Item.UseSound = SoundID.Item1; // The sound when the weapon is being used.
-            Item.GetGlobalItem<DiabloItem>().ManaStolenPerHitPercentage = 20;
+            Item.GetGlobalItem<DiabloItem>().LifeStolenPerHitPercentage = 20;
 		}
 
 		public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone) {

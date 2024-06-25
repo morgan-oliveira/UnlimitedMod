@@ -159,7 +159,7 @@ namespace UnlimitedMod.system.DiabloItem {
             //throw new NotImplementedException();
             // Implementing similarly to LifeStolenPerHit
             if (item.GetGlobalItem<DiabloItem>().ManaStolenPerHitPercentage > 0) {
-                player.statMana = item.damage * (int)(item.GetGlobalItem<DiabloItem>().ManaStolenPerHitPercentage / 100);
+                player.statMana += (int)Math.Ceiling(item.damage * (item.GetGlobalItem<DiabloItem>().ManaStolenPerHitPercentage / 100));
             }
         }
 
@@ -167,7 +167,7 @@ namespace UnlimitedMod.system.DiabloItem {
         {
             // LifeSteal is a float value, so we set its % relative to the item's damage
             if (item.GetGlobalItem<DiabloItem>().LifeStolenPerHitPercentage > 0) {
-                player.lifeSteal = item.damage * item.GetGlobalItem<DiabloItem>().LifeStolenPerHitPercentage;
+                player.statLife += (int)Math.Ceiling(item.damage * (item.GetGlobalItem<DiabloItem>().LifeStolenPerHitPercentage / 100));
             }
         }
         #endregion
