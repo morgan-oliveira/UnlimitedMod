@@ -26,6 +26,7 @@ namespace UnlimitedMod
 			Item.rare = ItemRarityID.Expert; // Give this item our custom rarity.
 			Item.UseSound = SoundID.Item1; // The sound when the weapon is being used.
             Item.GetGlobalItem<DiabloItem>().LifeStolenPerHitPercentage = 20;
+            Item.GetGlobalItem<DiabloItem>().EnhancedDamage = 200f;
 		}
 
 		public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone) {
@@ -33,6 +34,13 @@ namespace UnlimitedMod
 			// 60 frames = 1 second
 			target.AddBuff(BuffID.OnFire, 60);
 		}
+        public override void AddRecipes()
+        {
+            CreateRecipe() // 'mod' é passado automaticamente para o ModItem
+                .AddIngredient(ItemID.IronOre, 10) // Adiciona 10 Minério de Ferro como ingrediente
+                .AddTile(TileID.WorkBenches) // Adiciona a bancada de trabalho como local de criação da receita
+                .Register(); // Registra a receita
+        }
 
 		// Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation
 	}

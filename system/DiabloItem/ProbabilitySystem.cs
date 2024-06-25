@@ -55,5 +55,7 @@ namespace UnlimitedMod.system.DiabloItem {
             item.damage = randomizer;
         }
 
+        
+
     }
 }

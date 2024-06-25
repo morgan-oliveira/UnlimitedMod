@@ -2,6 +2,7 @@ using System;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
+using Terraria.Utilities;
 
 namespace UnlimitedMod.system.DiabloItem {
     public class DiabloItem : GlobalItem {
@@ -66,7 +67,12 @@ namespace UnlimitedMod.system.DiabloItem {
             entity.GetGlobalItem<DiabloItem>().ManaStolenPerHitPercentage = ManaStolenPerHitPercentage;
         }
         public override bool InstancePerEntity => true;
-
+        public override bool? PrefixChance(Item item, int pre, UnifiedRandom rand)
+        {
+            if (pre == -1) {
+                return false;
+            } return false;
+        }
         #region SpecialAttributes
         public override void OnHitNPC(Item item, Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
