@@ -166,6 +166,8 @@ namespace UnlimitedMod.system.DiabloItem {
         private void LifeStolenPerHit(Player player, Item item)
         {
             // LifeSteal is a float value, so we set its % relative to the item's damage
+            // Math.Ceiling actually rounds float to the highest value, but we need an int casting because it returns a double
+            // We can round to the lowest value using Math.Floor, the same rules apply
             if (item.GetGlobalItem<DiabloItem>().LifeStolenPerHitPercentage > 0) {
                 player.statLife += (int)Math.Ceiling(item.damage * (item.GetGlobalItem<DiabloItem>().LifeStolenPerHitPercentage / 100));
             }
