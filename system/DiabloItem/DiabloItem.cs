@@ -119,7 +119,7 @@ namespace UnlimitedMod.system.DiabloItem {
         {
             // THIS IS WHERE WE CREATE AN INSTANCE OF ProbabilitySystem CLASS
             // Calculate Enhanced Damage
-            
+            EnhancedDamageRoll(item.GetGlobalItem<DiabloItem>().EnhancedDamage, item);
             // Calculate Enhanced Defense
 
             // Set Boolean variables to True, depending on their roll to Casting
@@ -177,6 +177,14 @@ namespace UnlimitedMod.system.DiabloItem {
             if (item.GetGlobalItem<DiabloItem>().LifeStolenPerHitPercentage > 0) {
                 player.statLife += (int)Math.Ceiling(item.damage * (item.GetGlobalItem<DiabloItem>().LifeStolenPerHitPercentage / 100));
             }
+        }
+        public void EnhancedDamageRoll(float enhancedDamage, Item item) {
+            item.GetGlobalItem<DiabloItem>().EnhancedDamage = enhancedDamage;
+            item.damage = (int)(item.damage * (RollSystem.GenerateRoll(item, enhancedDamage) / 100)); 
+        }
+        public void EnhancedDefenseRoll(float enhancedDefense, Item item) {
+            item.GetGlobalItem<DiabloItem>().EnhancedDefense = enhancedDefense;
+            item.defense = (int)(item.defense * (RollSystem.GenerateRoll(item, enhancedDefense) / 100));
         }
         #endregion
 

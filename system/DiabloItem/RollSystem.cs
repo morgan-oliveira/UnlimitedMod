@@ -15,6 +15,8 @@ namespace UnlimitedMod.system.DiabloItem {
             entity.GetGlobalItem<RollSystem>().lowerBound = lowerBound;
             entity.GetGlobalItem<RollSystem>().roll = roll;
         }
+        // Generates the highest possible value for the specified property. 
+        // Used to calculate the highest bound for the specified attribute's value
         public static float GenerateUpperRangeValue(Item item, float value) {
             if (value > 0) {
                 item.GetGlobalItem<RollSystem>().upperBound = value * 2;
@@ -22,6 +24,7 @@ namespace UnlimitedMod.system.DiabloItem {
             }
             else return -1;
         }  
+        // Similarly, this method generates the lowest possible value for the specified value.
         public static float GenerateLowerRangeValue(Item item, float value) {
             if (value > 0) {
                 item.GetGlobalItem<RollSystem>().lowerBound = value / 2;
@@ -29,17 +32,15 @@ namespace UnlimitedMod.system.DiabloItem {
             } 
             else return 1;
         } 
+        /* This method generates the actual roll for the specified value, using the values from GenerateLowerRangeValue
+        and GenerateUpperRangeValue as bounds for the NextFloat() method. 
+        We need to return the value to be able to use it in different methods, such as EnhancedDamageRoll(), SocketRoll(),
+        CalculateRES(), etc. 
+        
+        */
         public static float GenerateRoll(Item item, float value) {
             item.GetGlobalItem<RollSystem>().roll = Main.rand.NextFloat(GenerateLowerRangeValue(item, value), GenerateUpperRangeValue(item, value)+1);
             return item.GetGlobalItem<RollSystem>().roll;
-        }
-        public void EnhancedDamage(float enhancedDamage, Item item) {
-            item.GetGlobalItem<DiabloItem>().EnhancedDamage = enhancedDamage;
-            item.damage = (int)(item.damage * (GenerateRoll(item, enhancedDamage) / 100)); 
-        }
-        public override void OnCreated(Item item, ItemCreationContext context)
-        {
-            EnhancedDamage(item.GetGlobalItem<DiabloItem>().EnhancedDamage, item);
         }
     }
 }

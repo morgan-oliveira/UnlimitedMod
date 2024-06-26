@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("UnlimitedMod")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2a8a5ade874b0a86ec9d2c3d58fcdc4db8811a51")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c15b83742f75a7eb84c7a8f3a62c178c2116e482")]
 [assembly: System.Reflection.AssemblyProductAttribute("UnlimitedMod")]
 [assembly: System.Reflection.AssemblyTitleAttribute("UnlimitedMod")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
