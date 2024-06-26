@@ -35,8 +35,7 @@ namespace UnlimitedMod.system.DiabloItem {
         /* This method generates the actual roll for the specified value, using the values from GenerateLowerRangeValue
         and GenerateUpperRangeValue as bounds for the NextFloat() method. 
         We need to return the value to be able to use it in different methods, such as EnhancedDamageRoll(), SocketRoll(),
-        CalculateRES(), etc. 
-        
+        CalculateRES(), etc.    
         */
         public static float GenerateRoll(Item item, float value) {
             item.GetGlobalItem<RollSystem>().roll = Main.rand.NextFloat(GenerateLowerRangeValue(item, value), GenerateUpperRangeValue(item, value)+1);
