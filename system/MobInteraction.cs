@@ -11,8 +11,6 @@ namespace UnlimitedMod.system {
             Level.SetXPGain(npc.lifeMax);
             // DEBUG
             Main.NewText($"Você ganhou um total de {Level.xp} XP e está level {Level.level}");
-            Main.NewText($"Rolled {ProbabilitySystem.CalculateBaseProbabilities()}");
-            
         }
 
     }

@@ -1,0 +1,72 @@
+{
+  "prefixes": {
+    "1": {
+      "name": "Arcane",
+      "atr": "mana"
+    },
+    "2": {
+      "name": "Magical",
+      "atr": "magic"
+    },
+    "3": {
+      "name": "Hex",
+      "atr": "mana"
+    },
+    "4": {
+      "name": "Mana-loved",
+      "atr": "mana"
+    },
+    "5": {
+      "name": "Mythical",
+      "atr": "manaCost"
+    },
+    "6": {
+      "name": "Mythological",
+      "atr": "magic"
+    },
+    "7": {
+      "name": "Fantastic",
+      "atr": "knockback"
+    },
+    "8": {
+      "name": "World-class",
+      "atr": "magic,knockback"
+    },
+    "9": {
+      "name": "Cabalistic",
+      "atr": "FCR,poisonTag"
+    },
+    "10": {
+      "name": "God-made",
+      "atr": "atkspd,melee,critchance"
+    },
+    "11": {
+      "name": "Rapid",
+      "atr": "atkspd"
+    },
+    "12": {
+      "name": "Insane",
+      "atr": "movespd,knockback"
+    },
+    "13": {
+      "name": "Dubious",
+      "atr": "melee,magic"
+    },
+    "14": {
+      "name": "Frenzy",
+      "atr": "atkspd,movespd,jumpspd"
+    },
+    "15": {
+      "name": "Berserk",
+      "atr": "atkspd,melee"
+    },
+    "16": {
+      "name": "Ninjutsu",
+      "atr": "atkspd"
+    },
+    "17": {
+      "name": "Numb",
+      "atr": "atkspd"
+    }
+  }
+}

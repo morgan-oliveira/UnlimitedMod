@@ -1,6 +1,7 @@
 using System;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Utilities;
 
@@ -69,6 +70,7 @@ namespace UnlimitedMod.system.DiabloItem {
         public override bool InstancePerEntity => true;
         public override bool? PrefixChance(Item item, int pre, UnifiedRandom rand)
         {
+            // Removing the old vanilla prefix system
             if (pre == -1) {
                 return false;
             } return false;
@@ -90,7 +92,7 @@ namespace UnlimitedMod.system.DiabloItem {
 
             // Crushing Blow
             if (HasCrushingBlow) {
-                CrushingBlow(CrushingBlowChance);
+                CrushingBlow(CrushingBlowChance, hit, target);
             }
 
             // Open Wounds
@@ -105,24 +107,42 @@ namespace UnlimitedMod.system.DiabloItem {
 
             // Chance to cast Waterbolt on hit
             if (HasChanceToCast) {
-                ChanceToCastSkill(ProjID, ChanceToCast);
+                ChanceToCastSkill(ProjID, ChanceToCast, item);
+            }
+            // If the item has a certain tag, it will apply specific effects on hit
+            if (item.GetGlobalItem<DiabloItem>().ColdTag) {
+                // Applies Frostburn
+                target.AddBuff(BuffID.Frostburn, 180); 
+                // Final damage output is reduced based on resistance
+                hit.Damage -= (int)(item.damage * item.GetGlobalItem<DiabloItem>().ColdResistance); 
+            }
+            if (item.GetGlobalItem<DiabloItem>().PoisonTag) {
+                target.AddBuff(BuffID.Poisoned, 180);
+                hit.Damage -= (int)(item.damage * item.GetGlobalItem<DiabloItem>().PoisonResistance); 
+            }
+            if (item.GetGlobalItem<DiabloItem>().FireTag) {
+                target.AddBuff(BuffID.OnFire, 180);
+                hit.Damage -= (int)(item.damage * item.GetGlobalItem<DiabloItem>().FireResistance); 
+            }
+            if (item.GetGlobalItem<DiabloItem>().LightningTag) {
+                target.AddBuff(BuffID.Electrified, 180);
+                hit.Damage -= (int)(item.damage * item.GetGlobalItem<DiabloItem>().LightningResistance); 
             }
 
         }
 
-        private void ChanceToCastSkill(int projectile, float chance)
-        {
-
+        private void ChanceToCastSkill(int projectile, float chance, Item item) {
+            
         }
 
         public override void OnCreated(Item item, ItemCreationContext context)
         {
-            // THIS IS WHERE WE CREATE AN INSTANCE OF ProbabilitySystem CLASS
             // Calculate Enhanced Damage
             EnhancedDamageRoll(item.GetGlobalItem<DiabloItem>().EnhancedDamage, item);
             // Calculate Enhanced Defense
-
-            // Set Boolean variables to True, depending on their roll to Casting
+            EnhancedDefenseRoll(item.GetGlobalItem<DiabloItem>().EnhancedDefense, item);
+            // Handles Elemental Tags
+            GenerateElementalTag(item);
         }
 
         private void CalculatePoisonRES(float poisonResistance)
@@ -155,9 +175,11 @@ namespace UnlimitedMod.system.DiabloItem {
             throw new NotImplementedException();
         }
 
-        private void CrushingBlow(float crushingBlowChance)
+        private void CrushingBlow(float crushingBlowChance, NPC.HitInfo hit, NPC target)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+
+            hit.Damage += (int)(target.lifeMax * 0.25f);
         }
 
         private void ManaStolenPerHit(Player player, Item item)
@@ -180,13 +202,33 @@ namespace UnlimitedMod.system.DiabloItem {
         }
         public void EnhancedDamageRoll(float enhancedDamage, Item item) {
             item.GetGlobalItem<DiabloItem>().EnhancedDamage = enhancedDamage;
-            item.damage = (int)(item.damage * (RollSystem.GenerateRoll(item, enhancedDamage) / 100)); 
+            item.damage = (int)(item.damage * RollSystem.GenerateRoll(item, enhancedDamage) / 100); 
         }
         public void EnhancedDefenseRoll(float enhancedDefense, Item item) {
             item.GetGlobalItem<DiabloItem>().EnhancedDefense = enhancedDefense;
-            item.defense = (int)(item.defense * (RollSystem.GenerateRoll(item, enhancedDefense) / 100));
+            if (item.defense > 0) {
+                item.defense = (int)(item.defense * (RollSystem.GenerateRoll(item, enhancedDefense) / 100));
+            }
         }
         #endregion
 
+        #region ElementalTags
+        public void GenerateElementalTag(Item item) {
+            if (RollSystem.GeneratePublicRoll(0.3f) == 1) {
+                int selector = Main.rand.Next(0,4);
+                switch (selector) {
+                    case 0: item.GetGlobalItem<DiabloItem>().ColdTag = true;
+                    break;
+                    case 1: item.GetGlobalItem<DiabloItem>().FireTag = true;
+                    break;
+                    case 2: item.GetGlobalItem<DiabloItem>().LightningTag = true;
+                    break;
+                    case 3: item.GetGlobalItem<DiabloItem>().PoisonTag = true;
+                    break;
+                }
+            }
+        }
+        #endregion
     }
 }
+ 

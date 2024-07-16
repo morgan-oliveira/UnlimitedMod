@@ -15,6 +15,18 @@ namespace UnlimitedMod.system.DiabloItem {
             if (item.GetGlobalItem<DiabloItem>().EnhancedDamage > 0) {
                 tooltips.Add(new TooltipLine(Mod, "enhdmg", $"Lower bound: {item.GetGlobalItem<RollSystem>().lowerBound}, Upper bound: {item.GetGlobalItem<RollSystem>().upperBound}, Actual Roll: {item.GetGlobalItem<RollSystem>().roll}"));
             }
+            if (item.GetGlobalItem<DiabloItem>().ColdTag) {
+                tooltips.Add(new TooltipLine(Mod, "coldtag", "[Cold]"){OverrideColor = Color.Cyan});
+            }
+            if (item.GetGlobalItem<DiabloItem>().FireTag) {
+                tooltips.Add(new TooltipLine(Mod, "firetag", "[Fire]"){OverrideColor = Color.OrangeRed});
+            }
+            if (item.GetGlobalItem<DiabloItem>().PoisonTag) {
+                tooltips.Add(new TooltipLine(Mod, "poisontag", "[Poison]"){OverrideColor = Color.LimeGreen});
+            }
+            if (item.GetGlobalItem<DiabloItem>().LightningTag) {
+                tooltips.Add(new TooltipLine(Mod, "lightningtag", "[Lightning]"){OverrideColor = Color.LightYellow});
+            }
         }
     }
 }
