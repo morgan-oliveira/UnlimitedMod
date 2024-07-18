@@ -1,72 +1,89 @@
 {
-  "prefixes": {
-    "1": {
+  "prefixes": [
+    {
+      "id": 1,
       "name": "Arcane",
       "atr": "mana"
     },
-    "2": {
+    {
+      "id": 2,
       "name": "Magical",
       "atr": "magic"
     },
-    "3": {
+    {
+      "id": 3,
       "name": "Hex",
       "atr": "mana"
     },
-    "4": {
+    {
+      "id": 4,
       "name": "Mana-loved",
       "atr": "mana"
     },
-    "5": {
+    {
+      "id": 5,
       "name": "Mythical",
       "atr": "manaCost"
     },
-    "6": {
+    {
+      "id": 6,
       "name": "Mythological",
       "atr": "magic"
     },
-    "7": {
+    {
+      "id": 7,
       "name": "Fantastic",
       "atr": "knockback"
     },
-    "8": {
+    {
+      "id": 8,
       "name": "World-class",
       "atr": "magic,knockback"
     },
-    "9": {
+    {
+      "id": 9,
       "name": "Cabalistic",
       "atr": "FCR,poisonTag"
     },
-    "10": {
+    {
+      "id": 10,
       "name": "God-made",
       "atr": "atkspd,melee,critchance"
     },
-    "11": {
+    {
+      "id": 11,
       "name": "Rapid",
       "atr": "atkspd"
     },
-    "12": {
+    {
+      "id": 12,
       "name": "Insane",
       "atr": "movespd,knockback"
     },
-    "13": {
+    {
+      "id": 13,
       "name": "Dubious",
       "atr": "melee,magic"
     },
-    "14": {
+    {
+      "id": 14,
       "name": "Frenzy",
       "atr": "atkspd,movespd,jumpspd"
     },
-    "15": {
+    {
+      "id": 15,
       "name": "Berserk",
       "atr": "atkspd,melee"
     },
-    "16": {
+    {
+      "id": 16,
       "name": "Ninjutsu",
       "atr": "atkspd"
     },
-    "17": {
+    {
+      "id": 17,
       "name": "Numb",
       "atr": "atkspd"
     }
-  }
+  ]
 }

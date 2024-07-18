@@ -4,6 +4,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Utilities;
+using UnlimitedMod.system.Prefix;
 
 namespace UnlimitedMod.system.DiabloItem {
     public class DiabloItem : GlobalItem {
@@ -143,6 +144,7 @@ namespace UnlimitedMod.system.DiabloItem {
             EnhancedDefenseRoll(item.GetGlobalItem<DiabloItem>().EnhancedDefense, item);
             // Handles Elemental Tags
             GenerateElementalTag(item);
+            
         }
 
         private void CalculatePoisonRES(float poisonResistance)
