@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
+using Terraria.ID;
 using UnlimitedMod.system.DiabloItem;
 
 namespace UnlimitedMod.system.Prefix
@@ -12,17 +13,16 @@ namespace UnlimitedMod.system.Prefix
     public class PrefixGenerator : GlobalItem
     {
         // Inicializando objeto do tipo PrefixController, que gerencia os dados desserializados do arquivo JSON.
-        public PrefixesList PrefixesData { get; private set; } 
         // Inicializando dicionário de ações por atributo, usando como chave os atributos, e como valor o delegate Action<>.
         private Dictionary<string, Action<Item>> attributeActions;
-        public List<PrefixController> prefixes;
+        public static List<PrefixController> prefixes = new List<PrefixController>();
+        public static List<string> splitAtr;
+        public static int Randomizer;
         public override bool InstancePerEntity => true;
 
-
+        public bool visual = true;
         public override void Load()
         {
-            // Carrega o arquivo JSON no caminho especificado
-            // O método Combine já coloca as barrinhas '/' do diretório, basta preencher com o nome das pastas
             string jsonFilePath = Path.Combine(ModLoader.ModPath, "Prefixes.JSON");
             if (File.Exists(jsonFilePath))
             {
@@ -31,67 +31,97 @@ namespace UnlimitedMod.system.Prefix
                 var rootJson = JsonConvert.DeserializeObject<Dictionary<string, List<PrefixController>>>(jsonContent);
                 prefixes = rootJson["prefixes"];
             }
-            // Inicializando dicionário associando atributos (atr) com o delegate Action, que recebe como parâmetro
-            // quaisquer métodos que usem um parâmetro da classe Item
-            // Cada par (atributo, metodo) representa o funcionamento de um prefixo do arquivo JSON
-            attributeActions = new Dictionary<string, Action<Item>> {
-                { "mana", ApplyMana },
-                { "melee", ApplyMelee }
-            };  
         }
         public override void OnCreated(Item item, ItemCreationContext context)
         {
-            if (prefixes != null && prefixes.Count > 0)
-            {
-                var randomm = Main.rand.Next(1, 5);
-                if (randomm < 3) {
-                    
-                }
-            }
             ApplyPrefixes(item);
         }
-
+        public override void OnSpawn(Item item, IEntitySource source)
+        {
+            Main.NewText($"{item.damage}");
+            ApplyPrefixes(item);
+        }
         // TODO: Finalizar funcionamento do método que associa um prefixo a um item
         public void ApplyPrefixes(Item item)
         {
-            if (PrefixesData != null && PrefixesData.Prefixes.Count > 0)
+            attributeActions = new Dictionary<string, Action<Item>> {
+                { "mana", ApplyMana },
+                { "melee", ApplyMelee },
+                { "magic", ApplyMagic },
+                { "knockback", ApplyKnockback },
+                { "FCR", ApplyFCR },
+                { "atkspd", ApplyATKSPD },
+                { "manaCost", ApplyManaCost },
+                { "movespd", ApplyMoveSPD }
+            };
+            
+            if (prefixes != null && prefixes.Count > 0)
             {
-                foreach (PrefixController prefix in prefixes)
+                Randomizer = Main.rand.Next(0, 17);
+                item.GetGlobalItem<PrefixController>().Atr = prefixes[Randomizer].Atr;     
+                item.SetNameOverride($"{prefixes[Randomizer].PrefixName} {item.Name}");
+                splitAtr = new List<string>(prefixes[Randomizer].Atr.Split(','));
+                
+                foreach (string atribute in splitAtr)
                 {
-                    if (attributeActions.ContainsKey(prefix.Atr))
-                    {
-                        // Chama o método associado ao atributo
-                        attributeActions[prefix.Atr](item);
-                    }
+                    // Chama o método associado ao atributo
+                    attributeActions[atribute](item);
                 }
-                item.SetNameOverride($"{prefixes[3]} {item.Name}");
+                
             }
         }
-        // Método para aplicar bônus de prefixo para itens melee
+
+        private void ApplyMoveSPD(Item item)
+        {
+            Main.NewText("Tais voando dog");
+        }
+
+        private void ApplyManaCost(Item item)
+        {
+            if (item.mana > 0) {
+                item.mana -= (int)(item.mana * 0.5f);
+            }
+        }
+
+        private void ApplyATKSPD(Item item)
+        {
+            if (item.DamageType == DamageClass.Melee) {
+                item.useTime -= 7;
+                item.useAnimation -= 7;
+            }
+        }
+
+        private void ApplyFCR(Item item)
+        {
+             if (item.DamageType == DamageClass.Magic) {
+                item.useTime -= 5;
+                item.useAnimation -= 5;
+             }
+        }
+
+        private void ApplyKnockback(Item item)
+        {
+            item.knockBack += 3.5f;
+        }
+
+        private void ApplyMagic(Item item)
+        {
+            if (item.DamageType == DamageClass.Magic) {
+                item.damage += (int)(item.damage * 0.25f);
+            }
+        }
+
         private void ApplyMelee(Item item)
         {
-            if (attributeActions.ContainsKey("Berserk"))
-            {
-                item.GetGlobalItem<PrefixController>().PrefixName = prefixes.GetEnumerator().Current.PrefixName;
-                if (item.DamageType == DamageClass.Melee)
-                {
-                    item.damage = (int)(item.damage * 0.3f);
-                    item.useTurn = false;
-                    item.useAnimation -= 10;
-                    item.useTime -= 10;
-                }
+            if (item.DamageType == DamageClass.Melee || item.DamageType == DamageClass.MeleeNoSpeed) {
+                item.damage += (int)(item.damage * 0.25f);
             }
         }
-        // Método para aplicar bônus de prefixo para itens magic
+
         private void ApplyMana(Item item)
         {
-            if (attributeActions.ContainsKey("Arcane"))
-            {
-                item.mana += Main.rand.Next(1, 21);
-            }
-            if (attributeActions.ContainsKey("Hex"))
-            {
-                item.mana += Main.rand.Next(20, 51);
+            if (item.mana > 0) {
+                Main.LocalPlayer.statMana += 20;
             }
         }
     }

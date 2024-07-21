@@ -37,6 +37,7 @@ namespace UnlimitedMod.system.DiabloItem {
         public bool CannotBeFrozen {get; set;}
         public float LifeStolenPerHitPercentage {get; set;}
         public float ManaStolenPerHitPercentage {get; set;}
+        public int oldDamage {get; set;}
         #endregion
 
         public override void SetDefaults(Item entity) {
@@ -67,6 +68,7 @@ namespace UnlimitedMod.system.DiabloItem {
             entity.GetGlobalItem<DiabloItem>().CannotBeFrozen = CannotBeFrozen;
             entity.GetGlobalItem<DiabloItem>().LifeStolenPerHitPercentage = LifeStolenPerHitPercentage;
             entity.GetGlobalItem<DiabloItem>().ManaStolenPerHitPercentage = ManaStolenPerHitPercentage;
+            entity.GetGlobalItem<DiabloItem>().oldDamage = oldDamage;
         }
         public override bool InstancePerEntity => true;
         public override bool? PrefixChance(Item item, int pre, UnifiedRandom rand)
@@ -149,22 +151,22 @@ namespace UnlimitedMod.system.DiabloItem {
 
         private void CalculatePoisonRES(float poisonResistance)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         private void CalculateLightningRES(float lightningResistance)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         private void CalculateFireRES(float fireResistance)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         private void CalculateColdRES(float coldResistance)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         private void DeadlyStrike(float deadlyStrikeChance)
@@ -204,7 +206,8 @@ namespace UnlimitedMod.system.DiabloItem {
         }
         public void EnhancedDamageRoll(float enhancedDamage, Item item) {
             item.GetGlobalItem<DiabloItem>().EnhancedDamage = enhancedDamage;
-            item.damage = (int)(item.damage * RollSystem.GenerateRoll(item, enhancedDamage) / 100); 
+            item.GetGlobalItem<DiabloItem>().oldDamage = item.damage;
+            //item.damage = (int)(item.damage * (RollSystem.GenerateRoll(item, enhancedDamage) / 100)); 
         }
         public void EnhancedDefenseRoll(float enhancedDefense, Item item) {
             item.GetGlobalItem<DiabloItem>().EnhancedDefense = enhancedDefense;
