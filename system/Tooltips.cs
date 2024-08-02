@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -13,9 +14,11 @@ namespace UnlimitedMod.system.DiabloItem
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
 
-            foreach (TooltipLine tooltip in tooltips) {
-                if (tooltip.Name == "Damage") {
-                    tooltip.Text += $" [{item.GetGlobalItem<DiabloItem>().oldDamage}]-[{(int)(item.GetGlobalItem<DiabloItem>().oldDamage * (item.GetGlobalItem<RollSystem>().upperBound / 100))}]";
+            foreach (TooltipLine tooltip in tooltips)
+            {
+                if (tooltip.Name == "Damage")
+                {
+                    tooltip.Text += $" [{Math.Round(item.GetGlobalItem<RollSystem>().lowerBound)}]-[{Math.Round(item.GetGlobalItem<RollSystem>().upperBound)}]";
                 }
             }
 
@@ -25,7 +28,7 @@ namespace UnlimitedMod.system.DiabloItem
             }
             if (item.GetGlobalItem<DiabloItem>().EnhancedDamage > 0)
             {
-                tooltips.Add(new TooltipLine(Mod, "enhdmg", $"Lower bound: {item.GetGlobalItem<RollSystem>().lowerBound}, Upper bound: {item.GetGlobalItem<RollSystem>().upperBound}, Actual Roll: {item.GetGlobalItem<RollSystem>().roll}"));
+                tooltips.Add(new TooltipLine(Mod, "enhdmg", $"+{Math.Round(item.GetGlobalItem<DiabloItem>().EnhancedDamage, 0)}% Enhanced Damage [{Math.Round(item.GetGlobalItem<RollSystem>().lowerBound,0)}]-[{Math.Round(item.GetGlobalItem<RollSystem>().upperBound)}]"){ OverrideColor = Color.Blue });
             }
             if (item.GetGlobalItem<DiabloItem>().ColdTag)
             {

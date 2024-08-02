@@ -31,8 +31,8 @@ namespace UnlimitedMod.system.DiabloItem
         }
         public override void OnKill(NPC npc)
         {
-            Main.NewText($"Cold RES: {NPC_ColdResistance*100}. Fire RES: {NPC_FireResistance*100}");
-            Main.NewText($"LIGHT RES: {NPC_LightningResistance*100}, Poison RES: {NPC_PoisonResistance*100}");
+            Main.NewText($"Cold RES: {Math.Round(NPC_ColdResistance*100)}. Fire RES: {Math.Round(NPC_FireResistance*100)}");
+            Main.NewText($"LIGHT RES: {Math.Round(NPC_LightningResistance*100)}, Poison RES: {Math.Round(NPC_PoisonResistance*100)}");
         }
         public override void OnSpawn(NPC npc, IEntitySource source)
         {

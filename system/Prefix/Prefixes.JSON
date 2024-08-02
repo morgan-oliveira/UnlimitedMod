@@ -8,7 +8,7 @@
     {
       "id": 2,
       "name": "Magical",
-      "atr": "magic"
+      "atr": "enhdmg"
     },
     {
       "id": 3,
@@ -28,7 +28,7 @@
     {
       "id": 6,
       "name": "Mythological",
-      "atr": "magic"
+      "atr": "enhdmg"
     },
     {
       "id": 7,
@@ -38,7 +38,7 @@
     {
       "id": 8,
       "name": "World-class",
-      "atr": "magic,knockback"
+      "atr": "enhdmg,knockback"
     },
     {
       "id": 9,
@@ -48,7 +48,7 @@
     {
       "id": 10,
       "name": "God-made",
-      "atr": "atkspd,melee,critchance"
+      "atr": "atkspd,enhdmg,critchance"
     },
     {
       "id": 11,
@@ -63,7 +63,7 @@
     {
       "id": 13,
       "name": "Dubious",
-      "atr": "melee,magic"
+      "atr": "enhdmg"
     },
     {
       "id": 14,
@@ -73,7 +73,7 @@
     {
       "id": 15,
       "name": "Berserk",
-      "atr": "atkspd,melee"
+      "atr": "atkspd,enhdmg"
     },
     {
       "id": 16,
@@ -84,6 +84,71 @@
       "id": 17,
       "name": "Numb",
       "atr": "atkspd"
+    },
+    {
+      "id": 18,
+      "name": "Strong",
+      "atr": "melee,knockback,enhdmg"
+    },
+    {
+      "id": 19,
+      "name": "Poisonous",
+      "atr": "poisonTag"
+    },
+    {
+      "id": 20,
+      "name": "Shocking",
+      "atr": "lightningTag"
+    },
+    {
+      "id": 21,
+      "name": "Burning",
+      "atr": "fireTag"
+    },
+    {
+      "id": 22,
+      "name": "Freezing",
+      "atr": "coldTag"
+    },
+    {
+      "id": 23,
+      "name": "Bewitched",
+      "atr": "summon"
+    },
+    {
+      "id": 24,
+      "name": "Enchanted",
+      "atr": "summon,enhdmg"
+    },
+    {
+      "id": 25,
+      "name": "Draconic",
+      "atr": "summon,fireTag,FCR"
+    },
+    {
+      "id": 26,
+      "name": "Malevolent",
+      "atr": "melee,atkspd,knockback,critchance"
+    },
+    {
+      "id": 27,
+      "name": "Obsidian",
+      "atr": "armor,enhdef"
+    },
+    {
+      "id": 28,
+      "name": "Adventurous",
+      "atr": "magicfind,exp,jumpspd,jumpheight"
+    },
+    {
+      "id": 29,
+      "name": "Venomous",
+      "atr": "poisondmg"
+    },
+    {
+      "id": 30,
+      "name": "Glacial",
+      "atr": "coldTag,colddmg,slow"
     }
   ]
 }

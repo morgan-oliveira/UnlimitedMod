@@ -1,0 +1,26 @@
+prefixes can roll a variety of different buffs to items. here are the main buffs:
+
+-enhanced damage: increases the item's base damage.
+-enhanced defense: increases the item's base defense.
+-faster cast rate (fcr): increases magic item' cast rate
+-faster run/walk: increases movement speed.
+-sockets: slots in which the player can add bonuses from gems, jewels and runes.
+-magic find (MF): increases drop rate for rarer items.
+-cold/fire/poison/lightning tags: specifies the damage type for this weapon.
+-cold/fire/poison/lightning resistance: specifies how resistant to specific damage type the player is.
+-open wounds: applies bleeding on hit
+-crushing blow: chance to deal (5% max hp) damage on hit.
+-deadly strike: chance to deal double damage on hit.
+-chance to cast X on hit: melee and magic weapons have a chance to cast a spell on hit.
+-cannot be frozen: the player is unaffected by the "frozen" debuff.
+-life stolen per hit: how much life the player will heal on hit, based on weapon damage.
+-mana stolen per hit: how much mana the player will regen on hit, based on weapon damage.
+--------- TO BE ADDED --------
+-magic damage increased by X%: increases overall magic damage (including damage from other sources such as skills on hit).
+-melee damage increased by X%: increases overall melee damage (including damage from other sources)
+-critical strike chance increased by X%: increases critical strike chance.
+-increases attack speed by X%: increases melee weapon attack speed.
+--X mana cost: decreases mana cost by a fixed amount.
+
+
+

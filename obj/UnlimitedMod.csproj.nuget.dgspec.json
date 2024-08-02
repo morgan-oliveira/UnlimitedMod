@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\Morgan\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\UnlimitedMod\\UnlimitedMod.csproj": {}
+    "C:\\Users\\Morgan\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\UnlimitedMod\\UnlimitedMod.csproj": {}
   },
   "projects": {
-    "c:\\Users\\Morgan\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\UnlimitedMod\\UnlimitedMod.csproj": {
+    "C:\\Users\\Morgan\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\UnlimitedMod\\UnlimitedMod.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\Morgan\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\UnlimitedMod\\UnlimitedMod.csproj",
+        "projectUniqueName": "C:\\Users\\Morgan\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\UnlimitedMod\\UnlimitedMod.csproj",
         "projectName": "UnlimitedMod",
-        "projectPath": "c:\\Users\\Morgan\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\UnlimitedMod\\UnlimitedMod.csproj",
+        "projectPath": "C:\\Users\\Morgan\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\UnlimitedMod\\UnlimitedMod.csproj",
         "packagesPath": "C:\\Users\\Morgan\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\Morgan\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\UnlimitedMod\\obj\\",
+        "outputPath": "C:\\Users\\Morgan\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\UnlimitedMod\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Morgan\\AppData\\Roaming\\NuGet\\NuGet.Config"

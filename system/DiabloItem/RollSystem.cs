@@ -1,6 +1,7 @@
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 using UnlimitedMod.system.DiabloItem;
 
 namespace UnlimitedMod.system.DiabloItem {
@@ -19,7 +20,7 @@ namespace UnlimitedMod.system.DiabloItem {
         // Used to calculate the highest bound for the specified attribute's value
         public static float GenerateUpperRangeValue(Item item, float value) {
             if (value > 0) {
-                item.GetGlobalItem<RollSystem>().upperBound = value * 2;
+                item.GetGlobalItem<RollSystem>().upperBound = value * 1.3f;
                 return item.GetGlobalItem<RollSystem>().upperBound;
             }
             else return -1;
@@ -27,7 +28,7 @@ namespace UnlimitedMod.system.DiabloItem {
         // Similarly, this method generates the lowest possible value for the specified value.
         public static float GenerateLowerRangeValue(Item item, float value) {
             if (value > 0) {
-                item.GetGlobalItem<RollSystem>().lowerBound = value / 2;
+                item.GetGlobalItem<RollSystem>().lowerBound = value * 0.6f;
                 return item.GetGlobalItem<RollSystem>().lowerBound;
             } 
             else return 1;
@@ -58,6 +59,18 @@ namespace UnlimitedMod.system.DiabloItem {
         }
         public static float GeneratePrefix(Item item, float value) {
             return -1;
+        }
+        public override void SaveData(Item item, TagCompound tag)
+        {
+            tag["lowerBound"] = lowerBound;
+            tag["upperBound"] = upperBound;
+            tag["roll"] = roll;
+        }
+        public override void LoadData(Item item, TagCompound tag)
+        {
+            lowerBound = tag.GetFloat("lowerBound");
+            upperBound = tag.GetFloat("upperBound");
+            roll = tag.GetFloat("roll");
         }
     }
 }

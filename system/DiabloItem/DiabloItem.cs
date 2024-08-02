@@ -4,7 +4,6 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Utilities;
-using UnlimitedMod.system.Prefix;
 
 namespace UnlimitedMod.system.DiabloItem {
     public class DiabloItem : GlobalItem {
@@ -140,10 +139,11 @@ namespace UnlimitedMod.system.DiabloItem {
 
         public override void OnCreated(Item item, ItemCreationContext context)
         {
+            item.GetGlobalItem<DiabloItem>().oldDamage = item.OriginalDamage;
             // Calculate Enhanced Damage
-            EnhancedDamageRoll(item.GetGlobalItem<DiabloItem>().EnhancedDamage, item);
+            //EnhancedDamageRoll(item.GetGlobalItem<DiabloItem>().EnhancedDamage, item);
             // Calculate Enhanced Defense
-            EnhancedDefenseRoll(item.GetGlobalItem<DiabloItem>().EnhancedDefense, item);
+            //EnhancedDefenseRoll(item.GetGlobalItem<DiabloItem>().EnhancedDefense, item);
             // Handles Elemental Tags
             GenerateElementalTag(item);
             
