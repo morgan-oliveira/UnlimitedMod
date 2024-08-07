@@ -18,7 +18,32 @@ namespace UnlimitedMod.system.DiabloItem
             {
                 if (tooltip.Name == "Damage")
                 {
-                    tooltip.Text += $" [{Math.Round(item.GetGlobalItem<RollSystem>().lowerBound)}]-[{Math.Round(item.GetGlobalItem<RollSystem>().upperBound)}]";
+                    tooltip.Text += $" [{item.GetGlobalItem<RollSystem>().rolledDamage}] [{item.GetGlobalItem<RollSystem>().damageRange.Min}]-[{item.GetGlobalItem<RollSystem>().damageRange.Max}]";
+                    if (item.GetGlobalItem<DiabloItem>().PoisonTag) {
+
+                        TooltipLine poisontooltip = new TooltipLine(Mod, "poisondmg", $"{item.GetGlobalItem<DiabloItem>().PoisonDamage} poison damage") { OverrideColor = Color.LimeGreen };
+                        tooltips.Insert(2, poisontooltip);
+                        break;
+                    }
+                    if (item.GetGlobalItem<DiabloItem>().FireTag) {
+
+                        TooltipLine firetooltip = new TooltipLine(Mod, "firedmg", $"{item.GetGlobalItem<DiabloItem>().FireDamage} fire damage") { OverrideColor = Color.OrangeRed };
+                        tooltips.Insert(2, firetooltip);
+                        break;
+                    }
+                    if (item.GetGlobalItem<DiabloItem>().ColdTag) {
+
+                        TooltipLine coldtooltip = new TooltipLine(Mod, "colddmg", $"{item.GetGlobalItem<DiabloItem>().ColdDamage} cold damage") { OverrideColor = Color.Cyan };
+                        tooltips.Insert(2, coldtooltip);
+                        break;
+                    }
+                    if (item.GetGlobalItem<DiabloItem>().LightningTag) {
+
+                        TooltipLine lightningtooltip = new TooltipLine(Mod, "lightningdmg", $"{item.GetGlobalItem<DiabloItem>().LightningDamage} lightning damage") { OverrideColor = Color.LightYellow };
+                        tooltips.Insert(2, lightningtooltip);
+                        break;
+                    }
+
                 }
             }
 
@@ -28,7 +53,7 @@ namespace UnlimitedMod.system.DiabloItem
             }
             if (item.GetGlobalItem<DiabloItem>().EnhancedDamage > 0)
             {
-                tooltips.Add(new TooltipLine(Mod, "enhdmg", $"+{Math.Round(item.GetGlobalItem<DiabloItem>().EnhancedDamage, 0)}% Enhanced Damage [{Math.Round(item.GetGlobalItem<RollSystem>().lowerBound,0)}]-[{Math.Round(item.GetGlobalItem<RollSystem>().upperBound)}]"){ OverrideColor = Color.Blue });
+                tooltips.Add(new TooltipLine(Mod, "enhdmg", $"+{Math.Round(item.GetGlobalItem<RollSystem>().rolledEnhancedDamage, 0)}% Enhanced Damage [{item.GetGlobalItem<RollSystem>().enhdmgRange.Min}]-[{item.GetGlobalItem<RollSystem>().enhdmgRange.Max}]"){ OverrideColor = Color.Blue });
             }
             if (item.GetGlobalItem<DiabloItem>().ColdTag)
             {
@@ -45,6 +70,9 @@ namespace UnlimitedMod.system.DiabloItem
             if (item.GetGlobalItem<DiabloItem>().LightningTag)
             {
                 tooltips.Add(new TooltipLine(Mod, "lightningtag", "[Lightning]") { OverrideColor = Color.LightYellow });
+            }
+            if (item.GetGlobalItem<PrefixController>().Atr == "poisondmg") {
+
             }
         }
     }

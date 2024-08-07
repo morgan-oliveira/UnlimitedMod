@@ -26,7 +26,11 @@ namespace UnlimitedMod
 			Item.rare = ItemRarityID.Expert; // Give this item our custom rarity.
 			Item.UseSound = SoundID.Item1; // The sound when the weapon is being used.
             Item.GetGlobalItem<DiabloItem>().LifeStolenPerHitPercentage = 20;
-            Item.GetGlobalItem<DiabloItem>().EnhancedDamage = 200f;
+            //Item.GetGlobalItem<DiabloItem>().EnhancedDamage = 200f;
+			Item.GetGlobalItem<DiabloItem>().HasChanceToCast = true;
+			Item.GetGlobalItem<DiabloItem>().ChanceToCast = 0.05f;
+			Item.GetGlobalItem<DiabloItem>().ProjID = ProjectileID.WaterBolt;
+			Item.GetGlobalItem<DiabloItem>().PoisonDamage = 20;
 		}
 
 		public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone) {

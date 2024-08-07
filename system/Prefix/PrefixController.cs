@@ -15,7 +15,7 @@ namespace UnlimitedMod.system.DiabloItem
         public string PrefixName { get; set; }    
         // Faz de forma similar, buscando a propriedade "atr"
         [JsonProperty("atr")]
-        public string Atr {get; set;}
+        public string Atr {get; set;} 
         [JsonProperty("id")]
         public int Id {get; set;}
 

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "JiGyat4WIVQ=",
+  "dgSpecHash": "hpuTdSXA5XI=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Morgan\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\UnlimitedMod\\UnlimitedMod.csproj",
+  "projectFilePath": "c:\\Users\\Morgan\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\UnlimitedMod\\UnlimitedMod.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Morgan\\.nuget\\packages\\tmodloader.codeassist\\0.1.5\\tmodloader.codeassist.0.1.5.nupkg.sha512"
   ],

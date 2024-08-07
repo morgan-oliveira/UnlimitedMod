@@ -10,6 +10,7 @@ namespace UnlimitedMod.system
     {
         public static int level = 1;
         public static int xp = 0;
+        public static float xpMult = 1;
         public static int xpToLevelUp;
         public static int points;
 
@@ -19,7 +20,7 @@ namespace UnlimitedMod.system
         }
         public static void SetXPGain(int XpGain)
         {
-            xp += XpGain;
+            xp += (int)Math.Round(XpGain * xpMult);
         }
         public static int GetLevel()
         {
