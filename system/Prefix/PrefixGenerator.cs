@@ -15,11 +15,13 @@ namespace UnlimitedMod.system.DiabloItem
     {
         // Inicializando objeto do tipo PrefixController, que gerencia os dados desserializados do arquivo JSON.
         // Inicializando dicionário de ações por atributo, usando como chave os atributos, e como valor o delegate Action<>.
-        private Dictionary<string, Action<Item>> attributeActions;
+        //private Dictionary<string, Action<Item>> attributeActions;
         public static List<PrefixController> prefixes = new List<PrefixController>();
         public static List<string> splitAtr;
         public static int Randomizer;
         public override bool InstancePerEntity => true;
+
+        public bool InventoryUpdated { get; private set; }
 
         public bool visual = true;
         public override void Load()
@@ -32,6 +34,14 @@ namespace UnlimitedMod.system.DiabloItem
                 var rootJson = JsonConvert.DeserializeObject<Dictionary<string, List<PrefixController>>>(jsonContent);
                 prefixes = rootJson["prefixes"];
             }
+
+        }
+        public override void SetDefaults(Item entity)
+        {
+            if (prefixes != null && prefixes.Count > 0)
+            {
+                entity.GetGlobalItem<PrefixController>().Atr = "";
+            }
         }
 
         public override void OnCreated(Item item, ItemCreationContext context)
@@ -39,13 +49,15 @@ namespace UnlimitedMod.system.DiabloItem
             if (DiabloItem.ValidateItem(item))
             {
                 ApplyPrefixes(item);
+                Main.NewText($"{item.DamageType.Name}");
+                Main.NewText($"{item.GetGlobalItem<PrefixController>().PrefixName}");
             }
         }
         public override void OnSpawn(Item item, IEntitySource source)
         {
             if (DiabloItem.ValidateItem(item))
             {
-                
+
                 ApplyPrefixes(item);
             }
 
@@ -72,33 +84,17 @@ namespace UnlimitedMod.system.DiabloItem
         // TODO: Finalizar funcionamento do método que associa um prefixo a um item
         public void ApplyPrefixes(Item item)
         {
-            attributeActions = new Dictionary<string, Action<Item>> {
-                { "enhdmg", DiabloItem.ApplyEnhancedDamage },
-                { "knockback", DiabloItem.ApplyKnockback },
-                { "FCR", DiabloItem.ApplyFCR },
-                { "atkspd", DiabloItem.ApplyATKSPD },
-                { "manaCost", DiabloItem.ApplyManaCost },
-                { "movespd", DiabloItem.ApplyMoveSPD },
-                { "jumpspd", DiabloItem.ApplyJumpSPD },
-                { "critchance", DiabloItem.ApplyCritChance },
-                { "poisonTag", DiabloItem.ApplyPoisonTag },
-                { "poisondmg", DiabloItem.GeneratePoisonDamage },
-
-            };
 
             if (prefixes != null && prefixes.Count > 0)
             {
                 Randomizer = Main.rand.Next(0, prefixes.Count);
                 item.GetGlobalItem<PrefixController>().Atr = prefixes[Randomizer].Atr;
-                item.SetNameOverride($"{prefixes[Randomizer].PrefixName} {item.Name}");
+                item.GetGlobalItem<PrefixController>().Type = prefixes[Randomizer].Type;
                 splitAtr = new List<string>(prefixes[Randomizer].Atr.Split(','));
-
-                foreach (string atribute in splitAtr)
+                if (item.GetGlobalItem<PrefixController>().Type == item.DamageType.Name || item.GetGlobalItem<PrefixController>().Type == "global")
                 {
-                    // Chama o método associado ao atributo
-                    attributeActions[atribute](item);
+                    item.SetNameOverride($"{prefixes[Randomizer].PrefixName} {item.Name}");
                 }
-
             }
         }
 

@@ -32,7 +32,7 @@ public class RollSystem : GlobalItem
     public int rolledPoisonDamage;
     public int rolledLightningDamage;
     public RollRange damageRange = new RollRange(0, 0);
-    public RollRange enhdmgRange;
+    public RollRange enhdmgRange = new RollRange(0, 0);
     public RollRange enhdefRange;
     public float lowRange = 0.6f;
     public float highRange = 1.3f;
@@ -83,15 +83,17 @@ public class RollSystem : GlobalItem
         }
     }
     public void EnhancedDamageRoll(Item item) {
-        if (item.damage > 0 || item.GetGlobalItem<PrefixController>().Atr.Contains("enhdmg")) {
+        if (item.GetGlobalItem<PrefixController>().Atr != "" && item.GetGlobalItem<PrefixController>().Atr.Contains("enhdmg") ) {
             item.GetGlobalItem<DiabloItem>().EnhancedDamage = Main.rand.NextFloat() * 100;
             enhdmgRange = CalculateRollRange((int)item.GetGlobalItem<DiabloItem>().EnhancedDamage, lowRange, highRange);
             item.GetGlobalItem<RollSystem>().rolledEnhancedDamage = RollValue(enhdmgRange);
         }
     }
+    public void EnhancedDefenseRoll(Item item) {
+
+    }
     public override void OnCreated(Item item, ItemCreationContext context)
     {
-
         DamageRoll(item);
         EnhancedDamageRoll(item);
         //Main.NewText($"{RollValue(item)}");

@@ -18,11 +18,19 @@ namespace UnlimitedMod.system.DiabloItem
         public string Atr {get; set;} 
         [JsonProperty("id")]
         public int Id {get; set;}
+        [JsonProperty("type")]
+        public string Type {get; set;}
 
         // Retorna uma lista de propriedades do tipo "atr", aceitando inclusive atrs múltiplos (separados por vírgula)
         public List<string> Attributes {
             get {
                 return new List<string>(Atr.Split(','));
+            }
+        }
+        // Retorna uma lista de tipos de dano "Type", aceitando inclusive múltiplos tipos (separados por vírgula)
+        public List<string> Types {
+            get {
+                return new List<string>(Type.Split(','));
             }
         }
         public override bool InstancePerEntity => true;
