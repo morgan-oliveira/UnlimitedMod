@@ -296,12 +296,6 @@ namespace UnlimitedMod.system.DiabloItem
             //throw new NotImplementedException();
             Main.NewText("Tais pulandinho hein dog");
         }
-
-        public static void ApplyEnhancedDamage(Item item)
-        {
-            //item.GetGlobalItem<DiabloItem>().EnhancedDamage = RollSystem.GenerateRoll(item, item.damage);
-        }
-
         public static void ApplyMoveSPD(Item item)
         {
             Main.NewText("Tais voando dog");

@@ -22,5 +22,10 @@ prefixes can roll a variety of different buffs to items. here are the main buffs
 -increases attack speed by X%: increases melee weapon attack speed.
 --X mana cost: decreases mana cost by a fixed amount.
 
+=============================================
+TODO LIST
+
+-Modify PrefixGenerator class to take the type list into account when deciding upon adding the rolled prefix or not
+-
 
 

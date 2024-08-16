@@ -82,22 +82,27 @@ public class RollSystem : GlobalItem
             item.damage = item.GetGlobalItem<RollSystem>().rolledDamage;
         }
     }
-    public void EnhancedDamageRoll(Item item) {
-        if (item.GetGlobalItem<PrefixController>().Atr != "" && item.GetGlobalItem<PrefixController>().Atr.Contains("enhdmg") ) {
-            item.GetGlobalItem<DiabloItem>().EnhancedDamage = Main.rand.NextFloat() * 100;
-            enhdmgRange = CalculateRollRange((int)item.GetGlobalItem<DiabloItem>().EnhancedDamage, lowRange, highRange);
-            item.GetGlobalItem<RollSystem>().rolledEnhancedDamage = RollValue(enhdmgRange);
-        }
+    public void EnhancedDamageRoll(Item item)
+    {
+            if (item.GetGlobalItem<PrefixController>().Atr.Contains("enhdmg"))
+            {
+                item.GetGlobalItem<DiabloItem>().EnhancedDamage = Main.rand.NextFloat() * 100;
+                enhdmgRange = CalculateRollRange((int)item.GetGlobalItem<DiabloItem>().EnhancedDamage, lowRange, highRange);
+                item.GetGlobalItem<RollSystem>().rolledEnhancedDamage = RollValue(enhdmgRange);
+            }
+        
     }
-    public void EnhancedDefenseRoll(Item item) {
+    public void EnhancedDefenseRoll(Item item)
+    {
 
     }
+
     public override void OnCreated(Item item, ItemCreationContext context)
     {
         DamageRoll(item);
         EnhancedDamageRoll(item);
-        //Main.NewText($"{RollValue(item)}");
-        Main.NewText($"{item.GetGlobalItem<RollSystem>().rolledDamage}");
+        Main.NewText($"{item.GetGlobalItem<RollSystem>().rolledEnhancedDamage}");
+        Main.NewText("◯");
 
     }
     public override void UpdateInventory(Item item, Player player)

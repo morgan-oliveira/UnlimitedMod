@@ -20,7 +20,7 @@ namespace UnlimitedMod.system.DiabloItem
         public static List<string> splitAtr;
         public static int Randomizer;
         public override bool InstancePerEntity => true;
-
+        public bool IsPrefixed { get; set; } = false;
         public bool InventoryUpdated { get; private set; }
 
         public bool visual = true;
@@ -65,40 +65,25 @@ namespace UnlimitedMod.system.DiabloItem
 
         public override void UpdateEquip(Item item, Player player)
         {
-            // Manually adding prefix effect because I'm stupid
-            if (item.Name.Contains("Arcane") || item.Name.Contains("Hex") || item.Name.Contains("Mana-loved"))
-            {
-                player.statManaMax2 += 20;
-                player.statMana += 20;
-            }
-            if (item.Name.Contains("Insane"))
-            {
-                player.moveSpeed += 0.2f;
-            }
-            if (item.Name.Contains("Adventurous"))
-            {
-                player.jumpSpeedBoost += 0.3f;
-                player.frogLegJumpBoost = true;
-            }
+
         }
         // TODO: Finalizar funcionamento do método que associa um prefixo a um item
         public void ApplyPrefixes(Item item)
         {
 
-            if (prefixes != null && prefixes.Count > 0)
+            if (prefixes != null && prefixes.Count > 0 && !item.GetGlobalItem<PrefixGenerator>().IsPrefixed)
             {
                 Randomizer = Main.rand.Next(0, prefixes.Count);
-                item.GetGlobalItem<PrefixController>().Atr = prefixes[Randomizer].Atr;
                 item.GetGlobalItem<PrefixController>().Type = prefixes[Randomizer].Type;
-                splitAtr = new List<string>(prefixes[Randomizer].Atr.Split(','));
                 if (item.GetGlobalItem<PrefixController>().Type == item.DamageType.Name || item.GetGlobalItem<PrefixController>().Type == "global")
                 {
+                    item.GetGlobalItem<PrefixController>().Atr = prefixes[Randomizer].Atr;
+                    splitAtr = new List<string>(prefixes[Randomizer].Atr.Split(','));
                     item.SetNameOverride($"{prefixes[Randomizer].PrefixName} {item.Name}");
+                    item.GetGlobalItem<PrefixGenerator>().IsPrefixed = true;
                 }
             }
         }
-
-
         #region TagCompoundSaves
         public override void SaveData(Item item, TagCompound tag)
         {
